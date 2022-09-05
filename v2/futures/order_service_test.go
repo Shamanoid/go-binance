@@ -92,7 +92,7 @@ func (s *orderServiceTestSuite) TestCreateOrder() {
 		ClientOrderID:    newClientOrderID,
 		CumQuote:         "0",
 		ExecutedQuantity: "0",
-		OrderID:          22542179,
+		OrderID:          "22542179",
 		OrigQuantity:     "10",
 		PositionSide:     positionSide,
 		Price:            "10000",
@@ -181,7 +181,7 @@ func (s *orderServiceTestSuite) TestListOpenOrders() {
 	r.Len(orders, 1)
 	e := &Order{
 		Symbol:        symbol,
-		OrderID:       1,
+		OrderID:       "1",
 		ClientOrderID: "myOrder1",
 		Price:         "0.1",
 		ReduceOnly:    false,
@@ -256,7 +256,7 @@ func (s *orderServiceTestSuite) TestGetOrder() {
 	defer s.assertDo()
 
 	symbol := "BTCUSDT"
-	orderID := int64(1)
+	orderID := "1"
 	origClientOrderID := "myOrder1"
 	s.assertReq(func(r *request) {
 		e := newSignedRequest().setParams(params{
@@ -272,7 +272,7 @@ func (s *orderServiceTestSuite) TestGetOrder() {
 	r.NoError(err)
 	e := &Order{
 		Symbol:           symbol,
-		OrderID:          1,
+		OrderID:          "1",
 		ClientOrderID:    origClientOrderID,
 		Price:            "0.1",
 		ReduceOnly:       false,
@@ -323,7 +323,7 @@ func (s *orderServiceTestSuite) TestListOrders() {
 	s.mockDo(data, nil)
 	defer s.assertDo()
 	symbol := "BTCUSDT"
-	orderID := int64(1)
+	orderID := "1"
 	limit := 3
 	startTime := int64(1499827319559)
 	endTime := int64(1499827319560)
@@ -346,7 +346,7 @@ func (s *orderServiceTestSuite) TestListOrders() {
 	r.Len(orders, 1)
 	e := &Order{
 		Symbol:           symbol,
-		OrderID:          1,
+		OrderID:          "1",
 		ClientOrderID:    "myOrder1",
 		Price:            "0.1",
 		ReduceOnly:       false,
@@ -395,7 +395,7 @@ func (s *orderServiceTestSuite) TestCancelOrder() {
 	defer s.assertDo()
 
 	symbol := "BTCUSDT"
-	orderID := int64(28)
+	orderID := "28"
 	origClientOrderID := "myOrder1"
 	s.assertReq(func(r *request) {
 		e := newSignedRequest().setFormParams(params{
@@ -416,7 +416,7 @@ func (s *orderServiceTestSuite) TestCancelOrder() {
 		CumQuantity:      "0",
 		CumQuote:         "0",
 		ExecutedQuantity: "0",
-		OrderID:          283194212,
+		OrderID:          "283194212",
 		OrigQuantity:     "11",
 		Price:            "8301",
 		ReduceOnly:       false,

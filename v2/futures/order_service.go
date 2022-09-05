@@ -200,7 +200,7 @@ func (s *CreateOrderService) Do(ctx context.Context, opts ...RequestOption) (res
 // CreateOrderResponse define create order response
 type CreateOrderResponse struct {
 	Symbol            string           `json:"symbol"`
-	OrderID           int64            `json:"orderId"`
+	OrderID           string           `json:"orderId"`
 	ClientOrderID     string           `json:"clientOrderId"`
 	Price             string           `json:"price"`
 	OrigQuantity      string           `json:"origQty"`
@@ -262,7 +262,7 @@ func (s *ListOpenOrdersService) Do(ctx context.Context, opts ...RequestOption) (
 type GetOrderService struct {
 	c                 *Client
 	symbol            string
-	orderID           *int64
+	orderID           *string
 	origClientOrderID *string
 }
 
@@ -273,7 +273,7 @@ func (s *GetOrderService) Symbol(symbol string) *GetOrderService {
 }
 
 // OrderID set orderID
-func (s *GetOrderService) OrderID(orderID int64) *GetOrderService {
+func (s *GetOrderService) OrderID(orderID string) *GetOrderService {
 	s.orderID = &orderID
 	return s
 }
@@ -313,7 +313,7 @@ func (s *GetOrderService) Do(ctx context.Context, opts ...RequestOption) (res *O
 // Order define order info
 type Order struct {
 	Symbol           string           `json:"symbol"`
-	OrderID          int64            `json:"orderId"`
+	OrderID          string           `json:"orderId"`
 	ClientOrderID    string           `json:"clientOrderId"`
 	Price            string           `json:"price"`
 	ReduceOnly       bool             `json:"reduceOnly"`
@@ -342,7 +342,7 @@ type Order struct {
 type ListOrdersService struct {
 	c         *Client
 	symbol    string
-	orderID   *int64
+	orderID   *string
 	startTime *int64
 	endTime   *int64
 	limit     *int
@@ -355,7 +355,7 @@ func (s *ListOrdersService) Symbol(symbol string) *ListOrdersService {
 }
 
 // OrderID set orderID
-func (s *ListOrdersService) OrderID(orderID int64) *ListOrdersService {
+func (s *ListOrdersService) OrderID(orderID string) *ListOrdersService {
 	s.orderID = &orderID
 	return s
 }
@@ -414,7 +414,7 @@ func (s *ListOrdersService) Do(ctx context.Context, opts ...RequestOption) (res 
 type CancelOrderService struct {
 	c                 *Client
 	symbol            string
-	orderID           *int64
+	orderID           *string
 	origClientOrderID *string
 }
 
@@ -425,7 +425,7 @@ func (s *CancelOrderService) Symbol(symbol string) *CancelOrderService {
 }
 
 // OrderID set orderID
-func (s *CancelOrderService) OrderID(orderID int64) *CancelOrderService {
+func (s *CancelOrderService) OrderID(orderID string) *CancelOrderService {
 	s.orderID = &orderID
 	return s
 }
@@ -468,7 +468,7 @@ type CancelOrderResponse struct {
 	CumQuantity      string           `json:"cumQty"`
 	CumQuote         string           `json:"cumQuote"`
 	ExecutedQuantity string           `json:"executedQty"`
-	OrderID          int64            `json:"orderId"`
+	OrderID          string           `json:"orderId"`
 	OrigQuantity     string           `json:"origQty"`
 	Price            string           `json:"price"`
 	ReduceOnly       bool             `json:"reduceOnly"`
@@ -518,7 +518,7 @@ func (s *CancelAllOpenOrdersService) Do(ctx context.Context, opts ...RequestOpti
 type CancelMultiplesOrdersService struct {
 	c                     *Client
 	symbol                string
-	orderIDList           []int64
+	orderIDList           []string
 	origClientOrderIDList []string
 }
 
@@ -529,7 +529,7 @@ func (s *CancelMultiplesOrdersService) Symbol(symbol string) *CancelMultiplesOrd
 }
 
 // OrderID set orderID
-func (s *CancelMultiplesOrdersService) OrderIDList(orderIDList []int64) *CancelMultiplesOrdersService {
+func (s *CancelMultiplesOrdersService) OrderIDList(orderIDList []string) *CancelMultiplesOrdersService {
 	s.orderIDList = orderIDList
 	return s
 }
@@ -721,7 +721,7 @@ func (s *ListUserLiquidationOrdersService) Do(ctx context.Context, opts ...Reque
 
 // UserLiquidationOrder defines user's liquidation order
 type UserLiquidationOrder struct {
-	OrderId          int64            `json:"orderId"`
+	OrderId          string           `json:"orderId"`
 	Symbol           string           `json:"symbol"`
 	Status           OrderStatusType  `json:"status"`
 	ClientOrderId    string           `json:"clientOrderId"`
